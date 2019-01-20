@@ -1,0 +1,40 @@
+import random
+print("""Welcome to Cows & Bulls!
+To play, start by choosing a 4-digit number. The computer will also choose a number. For each digit you guess that's also in the computer's number, if it's in the same position you have a cow, and if it's in a different position you have a bull.
+The goal is to figure out the computer's number!""")
+c = str(random.randint(1111, 9999))
+print(c)
+u = str(input("Choose a 4-digit number: "))
+count = 1
+def cows_and_bulls(a, b):
+  cows = 0
+  bulls = 0
+  for i in a:
+    if i in b and a.index(i) == b.index(i):
+      cows += 1
+    elif i in b and a.index(i) != b.index(i):
+      bulls += 1
+    elif i not in b:
+      cows += 0
+      bulls += 0
+  if cows != 1 and bulls != 1:
+    return str(cows) + " cows, " + str(bulls) + " bulls"
+  elif cows == 1 and bulls == 1:
+    return str(cows) + " cow, " + str(bulls) + " bull"
+  elif cows != 1 and bulls == 1:
+    return str(cows) + " cows, " + str(bulls) + " bull"
+  elif cows == 1 and bulls != 1:
+    return str(cows) + " cow, " + str(bulls) + " bulls"
+if u == c and count == 1:
+  print("Got it first time!")
+while u != c:
+  if len(u) != 4:
+    print("Invalid input.")
+    break
+  else:
+    print(cows_and_bulls(u, c))
+    count += 1
+    u = str(input("Try again: "))
+    if u == c:
+      print("You got it in", count, "tries!")
+      break
